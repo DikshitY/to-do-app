@@ -7,7 +7,11 @@ function App() {
 
   const getItems = () => {
   let taskList = JSON.parse(localStorage.getItem('list'))
-      return taskList
+      if(taskList){
+        return taskList
+      } else{
+        return []
+      }
   }
 
   const [task, setTask] = React.useState("")
@@ -72,16 +76,16 @@ function App() {
     setAllTasks([])
   }
 
-  const displayTask = allTasks.map((task, ind)=>{
-    return (<div key = {task.id} className='task-box'>
-        <h3>{task.name}</h3>
+  const displayTask = allTasks.map((elem)=>{
+    return (<div key = {elem.id} className='task-box'>
+        <h3>{elem.name}</h3>
         <div className='button-container'>
-          <button onClick={() => editItem(task.id)}>edit</button>
-          <button className='delete-btn' onClick={() => removeItem(task.id)}>delete</button>
+          <button onClick={() => editItem(elem.id)}>edit</button>
+          <button className='delete-btn' onClick={() => removeItem(elem.id)}>delete</button>
         </div>
      </div>)
   })
-
+  console.log(allTasks);
   return (
     <div className='main-container'>
       <h1>To-Do-List</h1>
